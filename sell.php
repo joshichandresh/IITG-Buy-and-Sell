@@ -91,6 +91,11 @@
 
 <?php
 session_start(); // Start the session
+if (!isset($_SESSION["id"])) {
+    // If not set, redirect to home page
+    header("Location: home.html");
+    exit();
+}
 
 $conn = new mysqli("localhost", "root", "", "buyandsell");
 
@@ -100,9 +105,7 @@ if ($conn->connect_error) {
 }
 
 // Ensure email exists in session
-if (!isset($_SESSION['email'])) {
-    die("Session email not set.");
-}
+
 
 $sid = $_SESSION['id'];
 
@@ -155,8 +158,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Allow certain file formats
-        if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif") {
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" ) {
+            echo "Sorry, only JPG, JPEG, PNG files are allowed.";
             $uploadOk = 0;
         }
 

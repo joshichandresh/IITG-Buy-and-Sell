@@ -1,6 +1,11 @@
 <?php
 // db_connection.php
-
+session_start();
+if (!isset($_SESSION["id"])) {
+    // If not set, redirect to home page
+    header("Location: home.html");
+    exit();
+}
 $servername = "localhost";  // Server name
 $username = "root";         // Database username
 $password = "";             // Database password

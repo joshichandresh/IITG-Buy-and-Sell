@@ -67,7 +67,9 @@
             max-width: 400px;
         }
 
-        .form input[type="text"] {
+        /* Uniform input styling for email and password fields */
+        .form input[type="text"],
+        .form input[type="password"] {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
@@ -76,6 +78,7 @@
             font-size: 1rem;
             background: rgba(255, 255, 255, 0.3); /* Transparent background */
             color: white;
+            box-sizing: border-box; /* Ensure consistent sizing */
         }
 
         .form input[type="submit"] {
@@ -119,7 +122,6 @@
         #formFooter a:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
 <body>
@@ -139,7 +141,7 @@
         <div class="form">
             <form action="choice.php" method="POST">
                 <input type="text" class="fadeIn second" name="email" placeholder="Email">
-                <input type="text" class="fadeIn third" name="password" placeholder="Password">
+                <input type="password" class="fadeIn third" name="password" placeholder="Password">
                 <input type="submit" class="fadeIn fourth" value="Login">
 
                 <div id="formFooter">
@@ -163,7 +165,6 @@
             'url("image3.jpg")',
             'url("image4.jpg")',
             'url("image5.jpg")'
-
         ];
 
         let currentImageIndex = 0;

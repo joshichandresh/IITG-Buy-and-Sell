@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION["admin_id"])) {
+    // If not set, redirect to home page
+    header("Location: home.html");
+    exit();
+}
 $conn = new mysqli("localhost", "root", "", "buyandsell");
 
 // Check connection

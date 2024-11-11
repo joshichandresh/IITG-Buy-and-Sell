@@ -1,3 +1,26 @@
+<?php
+// Start session or resume existing session
+session_start();
+
+// Check if session variable 'id' is set
+if (!isset($_SESSION["id"])) {
+    // If not set, redirect to home page
+    header("Location: home.html");
+    exit();
+}
+
+// If session is valid, proceed to connect to the database and fetch data
+$uid = $_SESSION["id"];
+$conn = new mysqli("localhost", "root", "", "buyandsell");
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$all = "SELECT * FROM product WHERE seller_id != $uid AND status = 'unsold'";
+$query = mysqli_query($conn, $all);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,29 +154,23 @@ td input[type="submit"]:hover {
     font-weight: bold;
     cursor: pointer;
 }
-</style>	
+</style>
 </head>
 <body>
-	
+
 <nav>
-	<a href="home.html">Home</a>
-	<a href="bought.php">Bought Items</a>
-	<a href="add_money.php">Add Money</a>
-	<a href="contact.php">Contact CC</a>
-	<a href="logout.php">Logout</a>
+    <a href="home.html">Home</a>
+    <a href="bought.php">Bought Items</a>
+    <a href="add_money.php">Add Money</a>
+    <a href="contact.php">Contact CC</a>
+    <a href="logout.php">Logout</a>
 </nav>
-	
+
 <div class="table">
     <?php
-    session_start();
-    $uid = $_SESSION["id"];
-    $conn = new mysqli("localhost", "root", "", "buyandsell");
-    $all = "SELECT * FROM product WHERE seller_id != $uid AND status = 'unsold'";
-    $query = mysqli_query($conn, $all);
-
     if (mysqli_num_rows($query) > 0) {
         echo '<table>
-                <tr>	
+                <tr>
                     <th>Product Image</th>
                     <th>Product Name</th>
                     <th>Price</th>

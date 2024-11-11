@@ -8,7 +8,9 @@ if ($conn->connect_error) {
 
 // Retrieve user input
 if (!isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['choice'])) {
-    echo "Please enter email, password, and choice.";
+
+    //echo "Please enter email, password, and choice.";
+    header("refresh:2;url=home.html");
     exit();
 }
 
